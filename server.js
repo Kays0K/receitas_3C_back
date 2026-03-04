@@ -24,6 +24,13 @@ server.post('/usuarios', async (request, reply) => {
     return 'Usuario criado com sucesso';
 });
 
+server.put('/usuarios/:id', async (request, reply) => {
+    const body = request.body;
+    const id = request.params.id;
+    const resultado = await sql.query('UPDATE usuario SET nome = $1, senha = $2 WHERE id = $3',[body.nome, body.senha, id])
+    return 'Usuário alterado com sucesso';
+});
+
 server.listen({ 
     port:3000
 });
