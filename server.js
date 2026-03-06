@@ -21,7 +21,7 @@ server.post('/usuarios', async (request, reply) => {
     const nome = request.body.nome;
     const senha = request.body.senha;
     const resultado = await sql.query('INSERT INTO usuario (nome, senha) VALUES ($1, $2)',[nome, senha]);
-    return 'Usuario criado com sucesso!';
+    reply.status(201).send({mensagem: "Usuário criado com sucesso!"});
 });
 
 server.put('/usuarios/:id', async (request, reply) => {
@@ -34,7 +34,7 @@ server.put('/usuarios/:id', async (request, reply) => {
 server.delete('/usuarios/:id', async (request, reply) => {
     const id = request.params.id;
     const resultado = await sql.query('DELETE FROM usuario WHERE id = $1', [id]);
-    return 'Usuário deletado!'
+    reply.status(204);
 });
 
 server.listen({ 
