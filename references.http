@@ -21,3 +21,7 @@ Content-Type: application/json
     "nome": "Gairo",
     "senha": "Fire red"
 }
+
+###
+
+DELETE http://localhost:3000/usuarios/
