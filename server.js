@@ -28,8 +28,21 @@ server.post('/usuarios', async (request, reply) => {
 server.put('/usuarios/:id', async (request, reply) => {
     const body = request.body;
     const id = request.params.id;
+    
+    if (!body.nome || !body.senha || !body.email) {
+        return reply.status(400).send({ error: "nome, senha, email é obrigatório!"})
+    }else if (!id) {
+        return reply.status(400).send({ error: "ID é obrigatório!" })
+    }
+
+    const existeUsuario = await sql.query('SELECT * FROM usuario WHERE id = $1', [id]);
+
+    if (existeUsuario.rows.length === 0) {
+        return reply.status(400).send({ error: 'Usuário com o id: ${id} não existe!' });
+    }
+
     const resultado = await sql.query('UPDATE usuario SET nome = $1, senha = $2, email = $3 WHERE id = $4',[body.nome, body.senha, body.email, id])
-    return 'Usuário alterado com sucesso!';
+    reply.status(201).send({mensagem: "Usuário alterado com sucesso!"});
 });
 
 server.delete('/usuarios/:id', async (request, reply) => {
