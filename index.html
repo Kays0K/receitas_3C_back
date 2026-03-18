@@ -3,9 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Teste</title>
 </head>
 <body>
-    
+    <button onclick="buscarUsuario()">Buscar</button>
+
+    <script>
+    async function buscarUsuario() {
+        const resultado = await fetch('http://localhost:3000/usuarios');
+        const usuarios = await resultado.json()
+    }
+    </script>
 </body>
 </html>

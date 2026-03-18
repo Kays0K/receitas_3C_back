@@ -1,5 +1,6 @@
 import Fastify from "fastify";
-import { Pool } from 'pg';
+import { Pool } from "pg";
+import cors from "@fastify/cors"
 
 const sql = new Pool({
     user: "postgres",
@@ -10,6 +11,10 @@ const sql = new Pool({
 })
 
 const server = Fastify();
+
+server.register(cors, {
+    origins: '*'
+})
 
 server.get('/usuarios', async () => {
     const result = await sql.query('SELECT * FROM usuario');
