@@ -59,8 +59,7 @@ server.post('/login', async (request, reply) => {
     if (result.rows.length === 0) {
         return reply.status(401).send({ mensagem: "Credenciais inválidas!" });
     }
-
-    return reply.send({ mensagem: "Login realizado com sucesso!" });
+    reply.status(200).send({ mensagem: "Login realizado com sucesso!" });
 });
 
 server.listen({ 
