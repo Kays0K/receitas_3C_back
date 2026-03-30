@@ -47,8 +47,9 @@
             body: JSON.stringify(body),
             headers: {"Content-Type": "application/jason"} 
         })
+        const retorno = await resultado.json()
+        alert(retorno.menssage);
     }
-
     </script>
 </body>
 </html>
